@@ -1,4 +1,4 @@
-# Tags Creation , Insertion and Deletion
+# Tags Creation , Insertion and Deletion :Testing
 This project adds 2000 object files to s3 bucket. Once added , the objects are given specific taggings .
 Based on these taggings , some objects are deleted successfully.
 # Files
@@ -14,6 +14,7 @@ Based on these taggings , some objects are deleted successfully.
 - **functions.py** - Comprises of upload functions like upload a folder, file or zip file to s3.
 - **Template.yaml** - A cloudforamtion template which comprises of configuration of s3bucket.
 - **tags.py** - Consists of tags creation ,tag insertion and tag deletion functions.
+-**Testing.py** - to test the code
 
 # Output
 Deletion of objects containing specific tag done successfully.
