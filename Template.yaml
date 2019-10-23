@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "testing"
+Parameters:
+  SourceBucket:
+    Type: String
+    Default: shivam1052061
+
+Resources:
+  bucket2:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref SourceBucket
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      LifecycleConfiguration:
+        Rules:
+          - Id: DeleteContentAfter1Day
+            Status: 'Enabled'
+            ExpirationInDays: 1
