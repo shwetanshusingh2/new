@@ -5,7 +5,7 @@ pipeline {
          stage('executing') {
             steps {
 
-                bat 'C://Users//ADMIN//py374 python test_funct.py'
+                bat 'python test_funct.py'
 
             }
         }
