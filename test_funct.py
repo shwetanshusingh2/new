@@ -4,6 +4,12 @@ from moto import mock_s3
 from functions import Functions
 from tags import Tags
 from tags import make_tags
+import os
+
+#os.environ['AWS_SHARED_CREDENTIALS_FILE'] = "C:/Users/Hp/.aws/credentials"
+
+#os.environ['AWS_PROFILE'] = "default"
+#os.environ['AWS_DEFAULT_REGION'] = "ap-south-1"
 
 INIT_BUCKET_NAME = "data-shivam"
 BUCKET_CONFIG = "ap-south-1"
@@ -44,7 +50,7 @@ class S3Tests(unittest.TestCase):
         """
         simulation of s3 file upload
         """
-        s3 = boto3.resource('s3')
+        s3 = boto3.resource('s3',region_name ="ap-south-1")
         s3.create_bucket(Bucket=self.source_bucketname)
         # s3.put_object(Bucket=self.source_bucketname, Key=self.key, Body=self.value)
 
@@ -53,7 +59,7 @@ class S3Tests(unittest.TestCase):
         self.__moto_setup()
         f = Functions(parameter)
         f.upload_objects()
-        s3_client = boto3.client("s3")
+        s3_client = boto3.client("s3",region_name ="ap-south-1")
         s3_bucket_object_count = 0
         response = s3_client.list_objects_v2(Bucket='shivam1052061')
         if response:
@@ -76,7 +82,7 @@ class S3Tests(unittest.TestCase):
     @mock_s3
     def test_tagging_insertion(self):
         self.__moto_setup()
-        s3_client = boto3.client('s3')
+        s3_client = boto3.client('s3',region_name ="ap-south-1")
         source_objectname_value = '1.txt'
         s3_client.put_object(Bucket='shivam1052061', Key=source_objectname_value)
         tagset_value = {'TagSet': [{'Key': 'notdivby2', 'Value': '2no'},
@@ -84,7 +90,7 @@ class S3Tests(unittest.TestCase):
         t = Tags(parameter)
 
         t.tagging_insertion(source_objectname_value, tagset_value)
-        s3_client = boto3.client('s3')
+        s3_client = boto3.client('s3',region_name ="ap-south-1")
         response = s3_client.get_object_tagging(
             Bucket=parameter['SourceBucketName'],
             Key=source_objectname_value
@@ -98,7 +104,7 @@ class S3Tests(unittest.TestCase):
     @mock_s3
     def test_tagging_deletion(self):
         self.__moto_setup()
-        s3_client = boto3.client('s3')
+        s3_client = boto3.client('s3',region_name ="ap-south-1")
         # ek object upload karo
         source_objectname_value = '1.txt'
         source_objectname_value2 = '2.txt'
