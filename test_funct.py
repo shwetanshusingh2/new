@@ -5,6 +5,7 @@ from functions import Functions
 from tags import Tags
 from tags import make_tags
 import os
+import xmlrunner
 
 #os.environ['AWS_SHARED_CREDENTIALS_FILE'] = "C:/Users/Hp/.aws/credentials"
 
@@ -101,6 +102,7 @@ class S3Tests(unittest.TestCase):
         for b in output_to_be_checked:
             self.assertIn(b, output_to_be_checked)
 
+    #C:\Users\ADMIN\PycharmProjects\week2OOPS
     @mock_s3
     def test_tagging_deletion(self):
         self.__moto_setup()
@@ -146,3 +148,11 @@ class S3Tests(unittest.TestCase):
             # print(s3_bucket_object_count)
             # assertequals karo
             self.assertEqual(1, object_count_in_the_bucket_after_deletion)
+
+
+if __name__ == '__main__':
+    unittest.main(
+        testRunner=xmlrunner.XMLTestRunner(output='test-reports'),
+        failfast=False,
+        buffer=False,
+        catchbreak=False)
